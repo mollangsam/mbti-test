@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>고3 맞춤 MBTI 검사</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Arial', sans-serif; background: #f0f4f8; color: #333; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    .container { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); width: 400px; text-align: center; }
+    h1 { font-size: 1.8rem; margin-bottom: 20px; }
+    p { font-size: 1.2rem; margin: 20px 0; min-height: 80px; }
+    button { padding: 15px 20px; margin: 10px; border: none; border-radius: 10px; cursor: pointer; font-size: 1rem; transition: 0.2s; }
+    .btn { background: #007bff; color: white; }
+    .btn:hover { background: #0056b3; }
+    .result { font-size: 1.5rem; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>고3 MBTI 검사</h1>
+  <p id="question">질문이 여기에 표시됩니다.</p>
+  <div>
+    <button class="btn" onclick="answer(1)">그렇다</button>
+    <button class="btn" onclick="answer(0)">아니다</button>
+  </div>
+  <div id="result" class="result"></div>
+</div>
+
+<script>
+  const questions = [
+    { q: "나는 처음 보는 사람과 이야기하는 게 편하다.", type: "EI" },
+    { q: "나는 혼자 있는 시간이 필요하다.", type: "EI" },
+    { q: "나는 계획을 세워서 움직이는 걸 좋아한다.", type: "JP" },
+    { q: "나는 즉흥적으로 결정하는 것을 좋아한다.", type: "JP" },
+    { q: "나는 감정보다는 논리로 판단하는 편이다.", type: "TF" },
+    { q: "나는 다른 사람의 기분을 잘 이해한다.", type: "TF" },
+    { q: "나는 새로운 아이디어를 생각하는 걸 좋아한다.", type: "SN" },
+    { q: "나는 구체적이고 현실적인 것을 선호한다.", type: "SN" }
+  ];
+
+  let idx = 0;
+  const scores = { EI: 0, SN: 0, TF: 0, JP: 0 };
+
+  function showQuestion() {
+    if (idx < questions.length) {
+      document.getElementById('question').innerText = questions[idx].q;
+    } else {
+      showResult();
+    }
+  }
+
+  function answer(value) {
+    const type = questions[idx].type;
+    scores[type] += value;
+    idx++;
+    showQuestion();
+  }
+
+  function showResult() {
+    let mbti = "";
+    mbti += scores["EI"] >= 1 ? "E" : "I";
+    mbti += scores["SN"] >= 1 ? "N" : "S";
+    mbti += scores["TF"] >= 1 ? "T" : "F";
+    mbti += scores["JP"] >= 1 ? "J" : "P";
+    document.getElementById('question').style.display = 'none';
+    document.querySelector('div').style.display = 'none';
+    document.getElementById('result').innerText = `당신의 MBTI는 ${mbti} 입니다!`;
+  }
+
+  showQuestion();
+</script>
+
+</body>
+</html>
