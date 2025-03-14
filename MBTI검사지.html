@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBTI 검사</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 80%;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question p {
+            font-size: 18px;
+        }
+        .question label {
+            margin-right: 20px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 30px;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            font-size: 24px;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MBTI 검사</h1>
+        <form id="mbtiForm">
+            <div class="question">
+                <p>1. 사람들과 함께 있는 것보다 혼자 있는 것이 편하다.</p>
+                <label><input type="radio" name="q1" value="I"> 예</label>
+                <label><input type="radio" name="q1" value="E"> 아니오</label>
+            </div>
+            <div class="question">
+                <p>2. 현실적인 정보보다는 직관적으로 느낌을 중요시한다.</p>
+                <label><input type="radio" name="q2" value="N"> 예</label>
+                <label><input type="radio" name="q2" value="S"> 아니오</label>
+            </div>
+            <div class="question">
+                <p>3. 결정을 내릴 때 감정보다 논리적인 이유를 중요시한다.</p>
+                <label><input type="radio" name="q3" value="T"> 예</label>
+                <label><input type="radio" name="q3" value="F"> 아니오</label>
+            </div>
+            <div class="question">
+                <p>4. 계획을 세우고 미리 준비하는 것이 좋다.</p>
+                <label><input type="radio" name="q4" value="J"> 예</label>
+                <label><input type="radio" name="q4" value="P"> 아니오</label>
+            </div>
+            <button type="button" onclick="calculateResult()">결과 보기</button>
+        </form>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateResult() {
+            let result = '';
+
+            // 질문에 대한 답변 가져오기
+            const q1 = document.querySelector('input[name="q1"]:checked')?.value;
+            const q2 = document.querySelector('input[name="q2"]:checked')?.value;
+            const q3 = document.querySelector('input[name="q3"]:checked')?.value;
+            const q4 = document.querySelector('input[name="q4"]:checked')?.value;
+
+            // 모든 질문에 대해 답변이 있어야 결과를 계산
+            if (!q1 || !q2 || !q3 || !q4) {
+                alert("모든 질문에 답변해주세요.");
+                return;
+            }
+
+            // MBTI 유형 계산
+            result = q1 + q2 + q3 + q4;
+
+            // 결과 출력
+            document.getElementById('result').innerHTML = `당신의 MBTI 유형은: <strong>${result}</strong> 입니다.`;
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
